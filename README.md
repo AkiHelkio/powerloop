@@ -1,2 +1,2 @@
 # powerloop
-powershell scripts
+A collection of random powershell scripts
