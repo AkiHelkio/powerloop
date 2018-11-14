@@ -5,11 +5,14 @@ Simulates a warp to tenant o365 exchange with primary account credentials
 [CmdletBinding()]
 param(
   [Parameter(Position=0,mandatory=$true)]
-  [String]$TenantName
+  [String]$TenantName,
+  [Switch]$Test
 )
 
+if ($Test) {
 # Import example functions. Disable on actual usage
 import-module .\DummyMsolFunctions.psm1
+}
 
 # Ask your creds:
 $creds = Get-Credential
