@@ -1,8 +1,15 @@
 <#
 .SYNOPSIS
-library of menu functions for 'Start-ThereCanOnlyBeOneMenu'
+library of menu functions for 'Start-ActiveMenu'
 #>
-function Get-DatasetColumnWidths {
+function Get-DatasetFilter {
+  <#
+  .DESCRIPTION
+  gets dataset
+  finds out the columns, gets the max widths
+  prepares a filter out row which keeps the data in order.
+  returns a string of '{0,column1Lengthmax}{1,column2length}etc.'
+  #>
   [CmdletBinding()]
   param(
     [Array]$data=@()
@@ -52,10 +59,10 @@ function Show-MenuTexts {
     write-host $($srow -join ", ") -foreground "white"
   }
 }
-function Start-ThereCanOnlyBeOneMenu {
+function Start-ActiveMenu {
   <#
   .SYNOPSIS
-  The main menu which will loop until only one is filtered
+  The main menu which will provide a filter feature by column
 
   .DESCRIPTION
   Basic specs:
@@ -69,7 +76,8 @@ function Start-ThereCanOnlyBeOneMenu {
   param(
     [Array]$Data=@(get-verb | select Verb | sort Verb),
     [Array]$Header=@("Verb"),
-    [String]$SearchColumn="Verb"
+    [String]$SearchColumn="Verb",
+    [int]$MaxResults=1
   )
 
   $KeyCode = @{
@@ -116,19 +124,19 @@ function Start-ThereCanOnlyBeOneMenu {
       }
     }
     elseif ($input.key -eq $KeyCode.ENTER) {
-      if ($selection.count -eq 1) {
-        $loop = $false
-        # Force the return value to use the filtered value:
-        $export = $selection[0]
-      }
-      elseif ($selection.count -eq 0){
-        $infotext = "Nothing to select from search"
-        $infocolor = "Red"
-      }
-      else {
-        $infotext = "Multiple selections. Please choose only one"
-        $infocolor = "Yellow"
-      }
+        if ($selection.count -gt 0 -and $selection.count -le $MaxResults) {
+          $loop = $false
+          # Force the return value to use the filtered value:
+          $export = 0..($MaxResults -1) | foreach { $selection[$_] }
+        }
+        elseif ($selection.count -eq 0){
+          $infotext = "Nothing to select from search"
+          $infocolor = "Red"
+        }
+        else {
+          $infotext = "Multiple selections. Exceeded max results: ($MaxResults)"
+          $infocolor = "Yellow"
+        }
     }
     # letters from A to Z contain the input keycode?
     elseif ($($KeyCode.A)..$($KeyCode.Z) -contains $input.key){
