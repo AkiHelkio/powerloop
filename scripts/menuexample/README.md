@@ -30,5 +30,15 @@ $result = Start-ThereCanOnlyBeOneMenu -Data $data -Header $header -SearchColumn 
 ```
 
 ##### Example output:
-```
+```text
+Info.............: ''
+Searching for....: 'exp'
+1852, explorer, , Microsoft Corporation
+3644, ShellExperienceHost, , Microsoft Corporation
+
+
+
+
+
+
 ```
