@@ -1,5 +1,5 @@
 import-module ..\..\imports\menulib.psm1 -Force
-$header = @("id","Name","Version","Company")
+$header = @("id","Name","ProductVersion","Company")
 $data = @(ps | select $header)
 $searchcolumn = "Name"
-$result = Start-ActiveMenu -Data $data -Header $header -SearchColumn "Name"
+return @(Start-ActiveMenu -Data $data -Header $header -SearchColumn "Name")
