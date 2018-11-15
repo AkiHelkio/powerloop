@@ -201,7 +201,7 @@ function Start-ActiveMenu {
   $infotext = ""      # used for row of text between loops
   $infocolor = "Cyan" # color for info row
   $searchString = ""  # the query searchString
-  $export = ""
+  $export = @()
   while ($loop) {
     # Force selection into an array
     $selection = @($data | where { $_.$SearchColumn -like "*$searchString*" })
@@ -220,7 +220,6 @@ function Start-ActiveMenu {
     if ($input.key -eq $KeyCode.ESC) {
       # Quit
       $loop = $false
-      write-host "Have a nice day :)" -foreground cyan
     }
     elseif ($input.key -eq $KeyCode.BACKSPACE) {
       # Remove char from end of searchstring:
