@@ -19,10 +19,14 @@ $loglevels = @(
   @{"text"="Error"; "color"="yellow";},
   @{"text"="Fatal"; "color"="red";}
 )
+$stats = @{
+  "refreshRate"=100;
+}
 $global_ConsoleRows = @()
 
 function New-RandomLogRow {
   $level = $loglevels[$(get-random -min 0 -max ($loglevels.count))]
+  
   $verbs = get-verb
   $verb = $verbs[$(get-random -min 0 -max $($verbs.count -1))].Verb
   $Group = $verbs[$(get-random -min 0 -max $($verbs.count -1))].Group
@@ -40,6 +44,7 @@ function New-LogRow {
     [object]$LogLevel,
     [String]$Message
   )
+  $stats.$($level.text) += 1
   $timestamp = $(get-date ).toString('yyyy-MM-dd HH:mm:ss')
   $format = "[{0}][{1,-7}] {2}"
   $logtext = $($format -f $timestamp,$LogLevel.text,$Message)
@@ -141,9 +146,7 @@ function Write-StringToScreenLocation {
 }
 
 
-$stats = @{
-  "refreshRate"=100
-}
+
 # Generate a range of characters
 $charRange = @([int]$([char]"A")..[int]$([char]"Z") |foreach { [char]$_})
 # Recast console rows
@@ -168,16 +171,17 @@ while($continue) {
         }
         Spacebar { $command += " " }
         Backspace { $command = Remove-CommandChar -command $command }
+        # Refreshrate can be increased or decreased
         DownArrow { $stats.refreshRate += 10 }
         UpArrow { $stats.refreshRate -= 10 }
       }
     }
     # if any key pressed. try to draw to bottom
     Show-ConsoleRow -Command $command
-    Show-InfoRow -Stats $stats
   }
   else {
     $global_ConsoleRows = Show-CurrentScreen -rows $global_ConsoleRows -command $command
+    Show-InfoRow -Stats $stats
     $global_ConsoleRows += New-RandomLogRow
     sleep -m $stats.refreshRate
   }

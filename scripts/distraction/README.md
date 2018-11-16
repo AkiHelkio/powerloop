@@ -9,9 +9,7 @@ Instead of writing with '\r' and nonewline. Example:
 write-host "live console> $command`r" -nonewline
 ```
 
-The approach is to flush the screen once and then start printing into specific locations with `System.Management.Automation.Host.Coordinates` and
-
-`$Host.UI.RawUI.CursorPosition`
+The approach is to flush the screen once and then start printing into specific locations with `System.Management.Automation.Host.Coordinates` and `$Host.UI.RawUI.CursorPosition`
 
 Additional whitespace clearing is implemented into the rows themselves.
 
