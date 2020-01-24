@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param (
-  [string]$tapahtumat = ""
+  [string]$tapahtumat = "",
+  [switch]$output
 )
 Begin {
   # tarkastetaan
@@ -40,7 +41,11 @@ Process {
   }
 }
 End {
-  write-host "Luotu raportti raportti.csv"
-  $raportti | export-csv -path "raportti.csv" -delimiter ";" -Encoding UTF8 -NoTypeinformation
-  return $raportti
+  if ($output) {
+    return $raportti
+  }
+  else {
+    write-host "Luotu raportti raportti.csv"
+    $raportti | export-csv -path "raportti.csv" -delimiter ";" -Encoding UTF8 -NoTypeinformation
+  }
 }
