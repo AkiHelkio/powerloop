@@ -2,9 +2,10 @@
 
 Osuuspankin syövereistä voi ladata "tapahtumat" -csv tiedoston vuoden ajalta.
 
-Tällä skriptillä voit laskea aineistoista mille kaikille uniikeille
-viitteille on maksettu euroja. Skripti luo uuden csv -tiedoston
-nimellä `raportti.csv`.
+Tällä skriptillä voit laskea aineistoista kaikkien yksilöllisten viitteiden summan, eli mille kaikille uniikeille
+viitteille on maksettu euroja. Skripti luo uuden csv -tiedoston nimellä `raportti.csv`.
+
+> Huom! Skripti ei laske viitteettömiä rivejä vaan ohittaa kaikki tyhjät viiterivit.
 
 ## Asennus
 
