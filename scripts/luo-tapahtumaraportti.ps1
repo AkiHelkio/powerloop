@@ -5,7 +5,7 @@ param (
 Begin {
   # tarkastetaan
   if ($tapahtumat.length -lt 1) {
-    write-output "Määritä polku Osuuspankin tilitapahtumat csv -tiedostoon komennon ensimmäisenä argumenttina`nEsim: .\luo-raportti.ps1 tapahtumat.csv"
+    write-output "Määritä polku Osuuspankin tilitapahtumat csv -tiedostoon komennon ensimmäisenä argumenttina`nEsim: .\luo-tapahtumaraportti.ps1 tapahtumat.csv"
     exit 1
   }
   if (!$(Test-path $tapahtumat)) {
