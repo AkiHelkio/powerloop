@@ -27,14 +27,15 @@ Process {
   foreach ($viite in $uniikit_viitteet) {
     $i++
     write-progress -activity "Käsitellään ja summataan uniikkeja viitteitä" -status "Summataan: $viite" -PercentComplete (($i / $uniikit_viitteet.count)*100)
-    # hae csvdatasta kaikki jossa on viite 'viite n' ja summaa sarakkeen arvot
+    # hae csvdatasta kaikki jossa on viite 'viite n'
     $viiterivit = $csvdata | where { $_.Viite -eq $viite }
-    $summa = $viiterivit | select -expand Eurot | Measure-Object -Sum |select -expand Sum
+    # muunnetaan tekstinä olevat pilkulliset eurot microsoftin ymmärtämään muotoon, konvertoidaan liukuluvuksi ja summataan:
+    $summa = $viiterivit | select @{n="eurot";e={$_.Eurot.replace(",",".") -as [float] }} | select -expand Eurot | Measure-Object -Sum | select -expand sum
     # tallennetaan summatut per viite
     $raportti += New-Object PSObject -Property @{
       Viite = $viite
       Summa = $summa
-      Saajat = $($viiterivit | select -expand Saaja | select -unique) -join ","
+      Saajat = $($viiterivit | select -expand Saaja | select -unique) -join ","  # jos ueasmpi saaja, yhdistä pilkulla
     }
   }
 }
