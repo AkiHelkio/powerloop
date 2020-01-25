@@ -9,11 +9,17 @@ viitteille on maksettu euroja. Skripti luo uuden csv -tiedoston nimellä `raport
 
 ## Asennus
 
-Avaa powershell admin -oikeuksilla ja salli skriptien suoritus komennolla:
+Avaa powershell admin -oikeuksilla. Etsi windowsin sovelluksista powershell -hakusanalla ja oikealla hiiren painikkeella klikkaa nimen päällä. Valikosta löytyy "Avaa adminina" ( ylin vaihtoehto ):
+
+![Open admin powershell](img/run_as_admin.png "Powershell admin")
+
+ja salli skriptien suoritus komennolla:
 
 ```powershell
 Set-ExecutionPolicy unrestricted
 ```
+
+![Set execution policy](img/exec_policy.png "Execution policy")
 
 Lataa tämän jälkeen [tämä koodiläjä zippinä](https://github.com/AkiHelkio/powerloop/archive/master.zip)
 
