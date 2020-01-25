@@ -59,4 +59,8 @@ kopioi csv samaan kansioon missä ps1-tiedosto on. Alla suoritus komenot esimerk
 ```powershell
 .\luo-tapahtumaraportti.ps1 tapahtumat20200101-20200125.csv
 ```
+Esimerkki:
 
+![exec example](img/example_report.gif "Run the report from tapahtumat file")
+
+Tämän jälkeen voit tiedoston viedä exceliin vaikkapa jatkokäsittelyä varten.
