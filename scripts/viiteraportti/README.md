@@ -23,7 +23,14 @@ Set-ExecutionPolicy unrestricted
 
 Lataa tämän jälkeen [tämä koodiläjä zippinä](https://github.com/AkiHelkio/powerloop/archive/master.zip)
 
-Pura zippi Lataukset kansioon.
+Pura zippi Lataukset kansioon ja siirry alahakemistoon:
+```
+.\Lataukset\powerloop-master\powerloop-master\scripts\viiteraportti\
+```
+
+Käy sallimassa skriptin suoritus: Oikea klikkaus tiedoston päällä ja Unblock, kuten kuvassa:
+
+![unblock](img/unblock.png "Salli suoritus")
 
 Avaa powershell start-valikosta ja siirry kansioon. Alla tuloste esimerkki miltä ikkunan tulisi näyttää:
 
