@@ -47,6 +47,10 @@ Mode                LastWriteTime         Length Name
 PS C:\Users\Aki\Lataukset\powerloop-master\powerloop-master\scripts\viiteraportti>
 ```
 
+Tässä vielä esimerkki havainnekuva. Paina TAB -painiketta niin komentorivi koittaa automaattisesti täydentää polun nimen:
+
+![cd example](img/example_folder_change.gif "Change to working directory")
+
 
 ## käyttö
 
